@@ -2,16 +2,19 @@
 # Exit on error
 set -o errexit
 
-# Clone Flutter stable channel into a temporary directory if not already cached
-if [ ! -d "../flutter" ]; then
-  git clone https://github.com/flutter/flutter.git -b stable --depth 1 ../flutter
+FLUTTER_DIR="$HOME/flutter"
+
+# Clone Flutter stable channel if not present
+if [ ! -d "$FLUTTER_DIR" ]; then
+  echo "Cloning Flutter SDK..."
+  git clone https://github.com/flutter/flutter.git -b stable --depth 1 "$FLUTTER_DIR"
 fi
 
-# Add Flutter to the path
-export PATH="$PATH:`pwd`/../flutter/bin"
+# Add Flutter to PATH
+export PATH="$FLUTTER_DIR/bin:$PATH"
 
-# Pre-download development binaries
-flutter doctor
+echo "Checking Flutter version..."
+flutter --version
 
-# Build the Flutter Web project
+echo "Building Flutter Web..."
 flutter build web --release
