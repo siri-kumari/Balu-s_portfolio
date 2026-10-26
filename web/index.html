@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Experience the magic of live saxophone with Balu — a professional saxophonist bringing timeless melodies, soulful expressions, and electrifying energy to every stage.">
+  <meta name="keywords" content="Balu Saxophonist, Bala Raju Ipparthi, Alto Saxophone, Saxophone Performer, Live Saxophone, Wedding Music, Live Stage Music, Hyderabad, Bengaluru">
+  <meta name="author" content="Balu Saxophonist">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Balu Saxophonist | Professional Alto Saxophone Artist">
+  <meta property="og:description" content="Experience the magic of live saxophone with Balu — making your special moments sound extraordinary.">
+  <meta property="og:type" content="website">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Balu Saxophonist">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <!-- Preconnect & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+
+  <title>Balu Saxophonist | Professional Alto Saxophone Artist</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #090A13;
+      color: #F1F5F9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    /* Loading animation before Flutter canvas renders */
+    #loading-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 45%, #131A33 0%, #0A0F1D 80%);
+      z-index: 99999;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .loader-soundwave {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 48px;
+    }
+    .loader-soundwave span {
+      width: 4px;
+      height: 12px;
+      background: linear-gradient(180deg, #67E8F9 0%, #00E5FF 50%, #6366F1 100%);
+      border-radius: 999px;
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+      animation: soundwave-pulse 1.2s ease-in-out infinite;
+    }
+    .loader-soundwave span:nth-child(1) { animation-delay: 0.1s; }
+    .loader-soundwave span:nth-child(2) { animation-delay: 0.3s; }
+    .loader-soundwave span:nth-child(3) { animation-delay: 0.5s; }
+    .loader-soundwave span:nth-child(4) { animation-delay: 0.2s; }
+    .loader-soundwave span:nth-child(5) { animation-delay: 0.4s; }
+    .loader-soundwave span:nth-child(6) { animation-delay: 0.15s; }
+    .loader-soundwave span:nth-child(7) { animation-delay: 0.35s; }
+    @keyframes soundwave-pulse {
+      0%, 100% { height: 10px; opacity: 0.4; }
+      50% { height: 44px; opacity: 1; }
+    }
+    .loader-title {
+      margin-top: 26px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 3.5px;
+      font-family: 'Playfair Display', Georgia, serif;
+      background: linear-gradient(135deg, #FFFFFF 0%, #67E8F9 60%, #00E5FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      text-shadow: 0 0 24px rgba(0, 229, 255, 0.3);
+    }
+    .loader-sub {
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      font-family: 'Inter', sans-serif;
+      color: #818CF8;
+      text-transform: uppercase;
+    }
+    .loader-status {
+      margin-top: 14px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      font-family: 'Inter', sans-serif;
+      color: rgba(148, 163, 184, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <div id="loading-container">
+    <div class="loader-soundwave">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="loader-title">BALU SAXOPHONIST</div>
+    <div class="loader-sub">Saxophone • Soul • Stories</div>
+    <div class="loader-status" id="loader-status">Connecting to live stage...</div>
+  </div>
+
+  <script>
+    var isLoaderRemoved = false;
+    function removeLoader() {
+      if (isLoaderRemoved) return;
+      isLoaderRemoved = true;
+      var loader = document.getElementById('loading-container');
+      if (loader) {
+        loader.style.opacity = '0';
+        loader.style.pointerEvents = 'none';
+        setTimeout(function() {
+          if (loader && loader.parentNode) {
+            loader.parentNode.removeChild(loader);
+          }
+        }, 500);
+      }
+    }
+
+    // 1. Standard Flutter first frame event (only fires when the app has actually painted)
+    window.addEventListener('flutter-first-frame', removeLoader);
+
+    // 2. Fallback: check if canvas has actually rendered content
+    var checkInterval = setInterval(function () {
+      var canvas = document.querySelector('canvas');
+      if (canvas && canvas.width > 0 && canvas.height > 0) {
+        // Allow a small grace period for first paint
+        setTimeout(removeLoader, 300);
+        clearInterval(checkInterval);
+      }
+    }, 250);
+
+    // 3. Update loading status text after 3s so the user knows it's transferring
+    setTimeout(function () {
+      var statusEl = document.getElementById('loader-status');
+      if (statusEl && !isLoaderRemoved) {
+        statusEl.innerText = "Loading performance repertoire...";
+      }
+    }, 3000);
+
+    setTimeout(function () {
+      var statusEl = document.getElementById('loader-status');
+      if (statusEl && !isLoaderRemoved) {
+        statusEl.innerText = "Almost ready...";
+      }
+    }, 7000);
+
+    // 4. Maximum failsafe timeout
+    setTimeout(function () {
+      clearInterval(checkInterval);
+      removeLoader();
+    }, 30000);
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
