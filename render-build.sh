@@ -4,7 +4,7 @@ set -o errexit
 
 # Clone Flutter stable channel into a temporary directory if not already cached
 if [ ! -d "../flutter" ]; then
-  git clone https://github.com -b stable ../flutter
+  git clone https://github.com/flutter/flutter.git -b stable --depth 1 ../flutter
 fi
 
 # Add Flutter to the path
